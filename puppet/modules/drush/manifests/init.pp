@@ -12,7 +12,7 @@ class drush {
       require => Exec['discover-drush-channel'];
     # Drush reply on Console_Table, will download automatically when first run
     'setup-drush':
-      command => 'drush && mkdir -p .drush/cache && chown -R $username:$group .drush/cache',
+      command => 'drush && mkdir -p .drush/cache && chmod -R 777 .drush && chown -R $username:$group .drush',
       user    => 'root',
       cwd     => $home,
       require => Exec['install-drush'];

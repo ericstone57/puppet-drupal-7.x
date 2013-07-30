@@ -21,6 +21,7 @@ class apt {
     'apt-update':
       command => 'aptitude -y update && touch /root/.apt-update',
       creates => '/root/.apt-update',
+      timeout => 900,
       require => [File['/etc/apt/sources.list'], Exec['ppa-add-repo-php5', 'ppa-add-repo-nginx-stable']];
   }
 
