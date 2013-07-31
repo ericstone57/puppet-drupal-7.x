@@ -4,7 +4,7 @@ class php {
     'php5-cli':
       ensure  => present,
       require => Exec['apt-update'];
-    ['php5-mysql', 'php5-curl', 'php5-fpm', 'php5-gd', 'php5-memcache', 'php-apc', 'php5-dev', 'php-pear', 'php5-xdebug', 'php5-imagick', 'php5-mcrypt']:
+    ['php5-mysql', 'php5-curl', 'php5-fpm', 'php5-gd', 'php5-memcached', 'php-apc', 'php5-dev', 'php-pear', 'php5-xdebug', 'php5-imagick', 'php5-mcrypt']:
       ensure  => present,
       require => Package['php5-cli'];
   }
