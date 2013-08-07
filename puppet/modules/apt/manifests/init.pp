@@ -11,8 +11,8 @@ class apt {
   }
   exec {
     'ppa-add-repo-php5':
-      command => 'add-apt-repository -y ppa:ondrej/php5',
-      creates => '/etc/apt/sources.list.d/ondrej-php5-precise.list',
+      command => 'add-apt-repository -y ppa:ondrej/php5-oldstable',
+      creates => '/etc/apt/sources.list.d/ondrej-php5-oldstable-precise.list',
       require => Package['python-software-properties'];
     'ppa-add-repo-nginx-stable':
       command => 'add-apt-repository -y ppa:nginx/stable',
