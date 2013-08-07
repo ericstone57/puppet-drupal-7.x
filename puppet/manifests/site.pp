@@ -1,9 +1,9 @@
+import 'settings'
+
 Exec { path => "/usr/sbin/:/sbin:/usr/bin:/bin" }
-File { owner => 'vagrant', group => 'vagrant' }
+File { owner => $user, group => $group }
 
 node 'default' {
-  import 'settings'
-
   include apt
   include nginx
   include php

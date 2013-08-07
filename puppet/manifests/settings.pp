@@ -1,4 +1,5 @@
 $username = 'vagrant'
+$user = 'vagrant'
 $group = 'vagrant'
 $home = '/home/vagrant'
 $www = '/vagrant'
