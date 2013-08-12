@@ -18,6 +18,10 @@ class apt {
       command => 'add-apt-repository -y ppa:nginx/stable',
       creates => '/etc/apt/sources.list.d/nginx-stable-precise.list',
       require => Package['python-software-properties'];
+    'ppa-add-repo-nginx-custom':
+      command => 'add-apt-repository -y ppa:brianmercer/nginx',
+      creates => '/etc/apt/sources.list.d/brianmercer-nginx-precise.list',
+      require => Package['python-software-properties'];
     'apt-update':
       command => 'aptitude -y update && touch /root/.apt-update',
       creates => '/root/.apt-update',
