@@ -86,29 +86,29 @@ location / {
         try_files $uri @drupal;
     }
 
-    ## Advanced Aggregation module CSS
-    ## support. http://drupal.org/project/advagg.
-    location ^~ /sites/default/files/advagg_css/ {
-        location ~* /sites/default/files/advagg_css/css_[[:alnum:]]+\.css$ {
-            access_log off;
-            add_header Pragma '';
-            add_header Cache-Control 'public, max-age=946080000';
-            add_header Accept-Ranges '';
-            try_files $uri @drupal;
-        }
-    }
+    ### Advanced Aggregation module CSS
+    ### support. http://drupal.org/project/advagg.
+    #location ^~ /sites/default/files/advagg_css/ {
+    #    location ~* /sites/default/files/advagg_css/css_[[:alnum:]]+\.css$ {
+    #        access_log off;
+    #        add_header Pragma '';
+    #        add_header Cache-Control 'public, max-age=946080000';
+    #        add_header Accept-Ranges '';
+    #        try_files $uri @drupal;
+    #    }
+    #}
 
-    ## Advanced Aggregation module JS
-    ## support. http://drupal.org/project/advagg.
-    location ^~ /sites/default/files/advagg_js/ {
-        location ~* /sites/default/files/advagg_js/js_[[:alnum:]]+\.js$ {
-            access_log off;
-            add_header Pragma '';
-            add_header Cache-Control 'public, max-age=946080000';
-            add_header Accept-Ranges '';
-            try_files $uri @drupal;
-        }
-    }
+    ### Advanced Aggregation module JS
+    ### support. http://drupal.org/project/advagg.
+    #location ^~ /sites/default/files/advagg_js/ {
+    #    location ~* /sites/default/files/advagg_js/js_[[:alnum:]]+\.js$ {
+    #        access_log off;
+    #        add_header Pragma '';
+    #        add_header Cache-Control 'public, max-age=946080000';
+    #        add_header Accept-Ranges '';
+    #        try_files $uri @drupal;
+    #    }
+    #}
 
     ## All static files will be served directly.
     location ~* ^.+\.(?:css|cur|js|jpg|jpeg|gif|htc|ico|png|html|xml)$ {
@@ -242,7 +242,7 @@ location @drupal {
     ## Filefield Upload progress
     ## http://drupal.org/project/filefield_nginx_progress support
     ## through the NginxUploadProgress modules.
-    #track_uploads uploads 60s;
+    track_uploads uploads 60s;
 }
 
 location @drupal-no-args {

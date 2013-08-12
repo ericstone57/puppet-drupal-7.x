@@ -37,19 +37,19 @@ class nginx {
       require      => Package['nginx-full'],
       notify       => Service['nginx'];
     '/etc/nginx/sites-available/www.conf':
-      source  => 'puppet:///modules/nginx/www.conf',
+      content  => template("nginx/www-${env}.erb"),
       owner   => 'root',
       group   => 'root',
       require => File['/etc/nginx'],
       notify  => Exec['enable-site-www-conf'];
     '/etc/nginx/nginx.conf':
-      source  => 'puppet:///modules/nginx/nginx.conf',
+      content  => template("nginx/nginx-${env}.erb"),
       owner   => 'root',
       group   => 'root',
       require => File['/etc/nginx'],
       notify  => Service['nginx'];
     '/etc/nginx/apps/drupal/drupal.conf':
-      source  => 'puppet:///modules/nginx/drupal.conf',
+      content  => template("nginx/drupal-${env}.erb"),
       owner   => 'root',
       group   => 'root',
       require => File['/etc/nginx'],
@@ -67,7 +67,7 @@ class nginx {
       require => File['/etc/nginx'],
       notify  => Service['nginx'];
     '/etc/nginx/upstream_phpcgi_tcp.conf':
-      source  => 'puppet:///modules/nginx/upstream_phpcgi_tcp.conf',
+      content  => template("nginx/upstream_phpcgi_tcp-${env}.erb"),
       owner   => 'root',
       group   => 'root',
       require => File['/etc/nginx'],

@@ -18,11 +18,7 @@ class php {
 
   file {
     '/etc/php5/fpm/php.ini':
-      source  => 'puppet:///modules/php/php.ini',
-      require => Package['php5-fpm'],
-      notify  => Service['php5-fpm'];
-    '/etc/php5/fpm/pool.d/www.conf':
-      source  => 'puppet:///modules/php/www.conf',
+      content  => "puppet:///modules/php/php-${env}.ini",
       require => Package['php5-fpm'],
       notify  => Service['php5-fpm'];
     '/etc/php5/mods-available/apc.ini':
@@ -30,5 +26,26 @@ class php {
       require => Package['php5-fpm'],
       notify  => Service['php5-fpm'];
 
+  }
+
+  if $env == 'dev' {
+    file {
+      '/etc/php5/fpm/pool.d/www.conf':
+      content => template("php/www-${env}.erb"),
+      require => Package['php5-fpm'],
+      notify  => Service['php5-fpm'];
+    }
+  }
+  elsif $env == 'prod' {
+    file {
+      '/etc/php5/fpm/pool.d/www1.conf':
+        content => template("php/www-${env}-1.erb"),
+        require => Package['php5-fpm'],
+        notify  => Service['php5-fpm'];
+      '/etc/php5/fpm/pool.d/www2.conf':
+        content => template("php/www-${env}-2.erb"),
+        require => Package['php5-fpm'],
+        notify  => Service['php5-fpm'];
+    }
   }
 }

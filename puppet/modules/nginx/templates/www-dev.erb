@@ -45,7 +45,7 @@ server {
     }
 
     ## Filesystem root of the site and index.
-    root /vagrant;
+    root <%= @www %>;
     index index.php;
 
     ## If you're using a Nginx version greater or equal to 1.1.4 then
