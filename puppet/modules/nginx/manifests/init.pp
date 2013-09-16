@@ -2,7 +2,7 @@ class nginx {
   package {
     'nginx-full':
       ensure => present,
-      require => Exec['apt-update']
+      require => Exec['apt-update', 'ppa-add-repo-nginx-stable', 'ppa-add-repo-nginx-custom']
   }
 
   service {
