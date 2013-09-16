@@ -10,23 +10,11 @@ class apt {
       source => 'puppet:///modules/apt/sources.list',
   }
   exec {
-    'ppa-add-repo-php5':
-      command => 'add-apt-repository -y ppa:ondrej/php5-oldstable',
-      creates => '/etc/apt/sources.list.d/ondrej-php5-oldstable-precise.list',
-      require => Package['python-software-properties'];
-    'ppa-add-repo-nginx-stable':
-      command => 'add-apt-repository -y ppa:nginx/stable',
-      creates => '/etc/apt/sources.list.d/nginx-stable-precise.list',
-      require => Package['python-software-properties'];
-    'ppa-add-repo-nginx-custom':
-      command => 'add-apt-repository -y ppa:brianmercer/nginx',
-      creates => '/etc/apt/sources.list.d/brianmercer-nginx-precise.list',
-      require => Package['python-software-properties'];
     'apt-update':
       command => 'aptitude -y update && touch /root/.apt-update',
       creates => '/root/.apt-update',
       timeout => 900,
-      require => [File['/etc/apt/sources.list'], Exec['ppa-add-repo-php5', 'ppa-add-repo-nginx-stable']];
+      require => [File['/etc/apt/sources.list']];
   }
 
 }

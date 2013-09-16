@@ -16,6 +16,14 @@ class php {
       require   => Package['php5-fpm'];
   }
 
+  exec {
+    'ppa-add-repo-php5':
+      command => 'add-apt-repository -y ppa:ondrej/php5-oldstable',
+      creates => '/etc/apt/sources.list.d/ondrej-php5-oldstable-precise.list',
+      require => Package['python-software-properties'],
+      notify  => Exec['apt-update'];
+  }
+
   file {
     '/etc/php5/fpm/php.ini':
       content  => "puppet:///modules/php/php-${env}.ini",
