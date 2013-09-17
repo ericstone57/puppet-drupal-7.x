@@ -40,6 +40,7 @@ class redis {
       notify  => File['/etc/php5/conf.d/redis.ini'];
     '/etc/php5/conf.d/redis.ini':
       ensure => link,
-      target => '/etc/php5/mods-available/redis.ini';
+      target => '/etc/php5/mods-available/redis.ini',
+      notify => Service['php5-fpm'];
   }
 }
