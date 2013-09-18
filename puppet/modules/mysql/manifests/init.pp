@@ -20,4 +20,11 @@ class mysql {
       require => Package['mysql-server'],
       notify  => Service['mysql'];
   }
+
+  if $env == 'dev' {
+    exec {
+      'mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'%\' WITH GRANT OPTION;FLUSH PRIVILEGES;"':
+        require => [Package['mysql-server', 'mysql-client'], File['/etc/mysql/my.cnf']]
+    }
+  }
 }
