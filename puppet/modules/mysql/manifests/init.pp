@@ -23,7 +23,8 @@ class mysql {
 
   if $env == 'dev' {
     exec {
-      'mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'%\' WITH GRANT OPTION;FLUSH PRIVILEGES;"':
+      'mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'%\' WITH GRANT OPTION;FLUSH PRIVILEGES;" && touch /root/.mysql_granted':
+        creates => '/root/.mysql_granted',
         require => [Package['mysql-server', 'mysql-client'], File['/etc/mysql/my.cnf']]
     }
   }
