@@ -12,5 +12,5 @@ node 'default' {
   include mysql
   include drush
   include redis
-  include sass
+  #include sass
 }
