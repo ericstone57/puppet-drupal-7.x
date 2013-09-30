@@ -3,7 +3,7 @@ class apt {
   package {
     'python-software-properties':
       ensure  => present,
-      require => Exec['apt-update']
+      require => Exec['apt-update'];
   }
   # use new mirror, faster in China
   file {
@@ -15,7 +15,6 @@ class apt {
       command => 'aptitude -y update && aptitude -y upgrade && touch /root/.apt-update',
       creates => '/root/.apt-update',
       timeout => 900,
-      require => [File['/etc/apt/sources.list']];
+      require => File['/etc/apt/sources.list'],
   }
-
 }

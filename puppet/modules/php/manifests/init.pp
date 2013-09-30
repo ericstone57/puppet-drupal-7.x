@@ -20,8 +20,7 @@ class php {
     'ppa-add-repo-php5':
       command => 'add-apt-repository -y ppa:ondrej/php5-oldstable',
       creates => '/etc/apt/sources.list.d/ondrej-php5-oldstable-precise.list',
-      require => Package['python-software-properties'],
-      notify  => Exec['apt-update'];
+      require => Package['python-software-properties'];
   }
 
   file {

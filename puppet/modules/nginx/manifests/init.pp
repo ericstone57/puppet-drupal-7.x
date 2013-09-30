@@ -2,7 +2,7 @@ class nginx {
   package {
     'nginx-full':
       ensure => present,
-      require => Exec['apt-update', 'ppa-add-repo-nginx-stable', 'ppa-add-repo-nginx-custom']
+      require => Exec['ppa-add-repo-nginx-stable', 'ppa-add-repo-nginx-custom']
   }
 
   service {
@@ -16,13 +16,11 @@ class nginx {
     'ppa-add-repo-nginx-stable':
       command => 'add-apt-repository -y ppa:nginx/stable',
       creates => '/etc/apt/sources.list.d/nginx-stable-precise.list',
-      require => Package['python-software-properties'],
-      notify  => Exec['apt-update'];
+      require => Package['python-software-properties'];
     'ppa-add-repo-nginx-custom':
       command => 'add-apt-repository -y ppa:brianmercer/nginx',
       creates => '/etc/apt/sources.list.d/brianmercer-nginx-precise.list',
-      require => Package['python-software-properties'],
-      notify  => Exec['apt-update'];
+      require => Package['python-software-properties'];
     'backup-nginx-conf':
       command => 'cp -r /etc/nginx /etc/nginx.bak',
       creates => '/etc/nginx.bak/nginx.conf',

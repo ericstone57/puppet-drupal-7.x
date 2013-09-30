@@ -15,9 +15,8 @@ class redis {
   exec {
     'ppa-add-redis':
       command => 'add-apt-repository -y ppa:rwky/redis',
-      creates => '/etc/apt/sources.list.d/rwky-redis.list',
-      require => Package['python-software-properties'],
-      notify  => Exec['apt-update'];
+      creates => '/etc/apt/sources.list.d/rwky-redis-precise.list',
+      require => Package['python-software-properties'];
     'clone phpredis repository':
       command => "git clone https://github.com/nicolasff/phpredis.git; touch /root/.phpredis_clone",
       cwd     => $home,
