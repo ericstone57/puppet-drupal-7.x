@@ -29,17 +29,13 @@ class redis {
       provider => shell,
       creates  => '/root/.phpredis',
       require  => [Package['redis-server', 'php5-dev'], Exec['clone phpredis repository']],
-      notify   => File['/etc/php5/mods-available/redis.ini'];
+      notify   => File['/etc/php5/conf.d/redis.ini'];
   }
 
   file {
-    '/etc/php5/mods-available/redis.ini':
-      ensure  => present,
-      content => "extension=redis.so",
-      notify  => File['/etc/php5/conf.d/redis.ini'];
     '/etc/php5/conf.d/redis.ini':
-      ensure => link,
-      target => '/etc/php5/mods-available/redis.ini',
-      notify => Service['php5-fpm'];
+      ensure => present,
+      content => "extension=redis.so",
+      notify => Service['php5-fpm']
   }
 }
