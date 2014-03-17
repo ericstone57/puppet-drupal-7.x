@@ -30,13 +30,13 @@ server {
 
     ## See the blacklist.conf file at the parent dir: /etc/nginx.
     ## Deny access based on the User-Agent header.
-    #if ($bad_bot) {
-    #    return 444;
-    #}
+    if ($bad_bot) {
+        return 444;
+    }
     ## Deny access based on the Referer header.
-    #if ($bad_referer) {
-    #    return 444;
-    #}
+    if ($bad_referer) {
+        return 444;
+    }
 
     ## Protection against illegal HTTP methods. Out of the box only HEAD,
     ## GET and POST are allowed.
@@ -61,10 +61,22 @@ server {
     ################################################################
     include apps/drupal/drupal.conf;
 
+    ################################################################
+    ### Configuration for Drupal 7 sites to serve URIs that need
+    ### to be **escaped**
+    ################################################################
+    #include apps/drupal/drupal_escaped.conf;
+
     #################################################################
     ### Configuration for Drupal 7 sites that use boost.
     #################################################################
     #include apps/drupal/drupal_boost.conf;
+
+    #################################################################
+    ### Configuration for Drupal 7 sites that use boost if having
+    ### to serve URIs that need to be **escaped**
+    #################################################################
+    #include apps/drupal/drupal_boost_escaped.conf;
 
     #################################################################
     ### Configuration for updating the site via update.php and running
@@ -90,7 +102,7 @@ server {
 
     ## Including the php-fpm status and ping pages config.
     ## Uncomment to enable if you're running php-fpm.
-    include php_fpm_status_vhost.conf;
+    #include php_fpm_status_vhost.conf;
 
     ## Including the Nginx stub status page for having stats about
     ## Nginx activity: http://wiki.nginx.org/HttpStubStatusModule.
